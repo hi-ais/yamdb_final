@@ -1,0 +1,7 @@
+import os
+
+from asgi import get_asgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'api_yamdb.settings')
+
+application = get_asgi_application()
