@@ -9,7 +9,7 @@ services:
     env_file:
       - ./.env
   web:
-    image: hiais/yamdb_final
+    image: hiais/yamdb_final:latest
     #build: ../api_yamdb
     restart: always
     volumes:
