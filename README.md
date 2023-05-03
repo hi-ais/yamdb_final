@@ -1,45 +1,45 @@
-# Учебный проект: yamdb_final
-Приложение  `api_yamdb`  упаковано в контейнеры. Настроены _Continuous Integration_  и  _Continuous Deployment. Реализованы:
--   автоматический запуск тестов,
--   обновление образов на Docker Hub,
--   автоматический деплой на боевой сервер при пуше в главную ветку  **_main_.**
+# Study project: yamdb_final
+The `api_yamdb` application is packaged in containers. Continuous Integration and Continuous Deployment are configured. Implemented:
+-   automatic start of tests,
+-   updating images on Docker Hub,
+-   automatic deployment to the production server when pushing to the main branch **_main_.**
 
-## Бейдж о статусе работы workflow
+## Workflow status badge
 ![workflow](https://github.com/hi-ais/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
-## Установка
+## Project setup
 
-1. Склонируйте репозиторий на Ваш компьютер
+1. Clone the repository
  `git@github.com:hi-ais/yamdb_final.git`
-2. Создайте и активируйте виртуальное окружение:  
+2. Create and activate the virtual environment:
  `python -m venv venv` 
  `source venv/Scripts/activate` 
  `python -m pip install`
-3. Установите зависимости из папки  `api_yamdb`: 
+3. Install dependencies from a folder  `api_yamdb`: 
  `pip install -r requirements.txt`
-4. Установите линтер flake8 
+4. Install the flake8 linter
  `pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort`
-5. Проверить код на соответствие стандартам  PEP8 и запуск pytest: 
+5. Check code against PEP8 standards and run pytest:
   `python -m flake8`
   `pytest`
-## Подготовка сервера 
-1. Войдите на свой удаленный сервер в облаке.
-2. Остановите службу nginx: 
+## Server preparation
+1. Log in to your remote server in the cloud.
+2. Stop the nginx service: 
   `sudo systemctl stop nginx`
-3. Установите Docker: 
+3. Install Docker: 
    `sudo apt install docker.io`
-4. Установите docker-compose:
+4. Install docker-compose:
    `sudo apt-get update`
    `sudo apt-get install docker-compose-plugin`
-5. Скопируйте файлы docker-compose.yaml и nginx/default.conf из вашего проекта на сервер в home/<ваш_username>/docker-compose.yaml и home/<ваш_username>/nginx/default.conf соответственно:
+5. Copy files docker-compose.yaml and nginx/default.conf from your project to the server in home/<ваш_username>/docker-compose.yaml and home/<ваш_username>/nginx/default.conf respectively:
     `scp docker-compose.yaml <USER>@<HOST>`
     `scp default.conf <USER>@<HOST>:/nginx/`
-## Развертывание приложения
-1. При пуше в ветку main приложение пройдет тесты, обновит образ на DockerHub и сделает деплой на сервер. Дальше необходимо подключиться к серверу.
+## Application Deployment
+1. When pushing to the main branch, the application will pass the tests, update the image on DockerHub, and deploy to the server. Next, you need to connect to the server.
  `ssh <USER>@<HOST>`
-2. Перейдите в запущенный контейнер приложения `api_yamdb` командой:
+2.Change to the running `api_yamdb` application container with the command:
 `sudo docker container exec -it <CONTAINER ID> bash`
-3. Внутри контейнера необходимо выполнить миграции, подключить статику и создать суперпользователя:
+3. Inside the container, you need to perform migrations, connect statics and create a superuser:
  `python manage.py makemigrations reviews`
  `python manage.py migrate`
  `python manage.py collectstatic --no-input`
