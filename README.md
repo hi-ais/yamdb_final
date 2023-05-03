@@ -37,8 +37,10 @@ The `api_yamdb` application is packaged in containers. Continuous Integration an
 ## Application Deployment
 1. When pushing to the main branch, the application will pass the tests, update the image on DockerHub, and deploy to the server. Next, you need to connect to the server.
  `ssh <USER>@<HOST>`
+ 
 2.Change to the running `api_yamdb` application container with the command:
 `sudo docker container exec -it <CONTAINER ID> bash`
+
 3. Inside the container, you need to perform migrations, connect statics and create a superuser:
  `python manage.py makemigrations reviews`
  `python manage.py migrate`
